@@ -7,19 +7,35 @@ const ui = {
     try{
 
       const pensamentos = await api.buscarPensamentos();
-        pensamentos.forEach(pensamento => {
-        listaPensamentos.innerHTML += `
-          <li class="li-pensamento" data-id="${pensamento.id}">
-          <img src="assets/imagens/aspas-azuis.png" alt="Aspas azuis" class="icone-aspas">
-          <div class="pensamento-conteudo">${pensamento.conteudo}</div>
-          <div class="pensamento-autoria">${pensamento.autoria}</div>
-          </li>
-        `;
-      });
-
+        pensamentos.forEach(pensamento => this.adicionarPensamentoNaLista(pensamento));
     }catch{
       alert("Erro ao renderizar pensamentos")
     }
+  },
+  adicionarPensamentoNaLista(pensamento){
+    const listaPensamentos = document.getElementById('lista-pensamentos')
+    const liElement = document.createElement('li');
+    liElement.classList.add('li-pensamento');
+    liElement.setAttribute('data-id', pensamento.id);
+
+    const imgElement = document.createElement('img');
+    imgElement.src = "assets/imagens/aspas-azuis.png";
+    imgElement.alt = "Aspas azuis";
+    imgElement.classList.add('icone-aspas');
+
+    const divConteudo = document.createElement('div');
+    divConteudo.classList.add('pensamento-conteudo');
+    divConteudo.textContent = pensamento.conteudo
+    
+    const divAutoria = document.createElement('div');
+    divAutoria.classList.add('pensamento-autoria');
+    divAutoria.textContent = pensamento.autoria
+
+    liElement.appendChild(imgElement);
+    liElement.appendChild(divConteudo);
+    liElement.appendChild(divAutoria);
+    listaPensamentos.appendChild(liElement);
+
   },
   limparCampos(){
     const botaoCancelar = document.getElementById("botao-cancelar");
