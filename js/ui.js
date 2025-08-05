@@ -38,14 +38,7 @@ const ui = {
 
   },
   limparCampos(){
-    const botaoCancelar = document.getElementById("botao-cancelar");
-    const inputPensamento = document.getElementById("pensamento-conteudo");
-    const pensamentoAutoria = document.getElementById("pensamento-autoria");
-
-    botaoCancelar.addEventListener('click', () => {
-      inputPensamento.value = "";
-      pensamentoAutoria.value = "";
-    })
+    document.getElementById("pensamento-form").reset();
   }
 }
 

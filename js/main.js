@@ -3,10 +3,12 @@ import ui from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   ui.renderizarPensamentos();
-  ui.limparCampos();
 
   const formularioPensamento = document.getElementById("pensamento-form");
+  const botaoCancelar = document.getElementById("botao-cancelar");
+
   formularioPensamento.addEventListener('submit', manipularSubmissaoFormulario);
+  botaoCancelar.addEventListener('click', manipularCancelamento)
 });
 
 async function manipularSubmissaoFormulario(event){
@@ -21,4 +23,8 @@ async function manipularSubmissaoFormulario(event){
   } catch (error) {
     alert(error)
   }
+}
+
+function manipularCancelamento(){
+  ui.limparCampos();
 }
