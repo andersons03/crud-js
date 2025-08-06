@@ -48,7 +48,7 @@ main {
 
 
 header {
-  padding: 112px 240px 112px 360px;
+  padding: 112px 30px;
   background: var(--Azul-Dark, #041832);
 }
 
@@ -78,8 +78,13 @@ header .logo h1 {
   line-height: 67.6px;
 }
 
-.imagem-cabecalho img{
+.imagem-cabecalho{
   max-width: 500px;
+  width: 50%;
+
+  img{
+    width: 100%;
+  }
 }
 
 footer {
@@ -206,7 +211,7 @@ h2, h3 {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   row-gap: 32px;
 }
 
@@ -281,4 +286,29 @@ span {
   height: 1px;
   background: #041832;
   margin: 96px 0 48px 0;
+}
+
+@media (width < 1200px) {
+  header .logo h1{
+    font-size: 40px;
+    line-height: 1.2;
+  }
+
+  h2, h3{
+    font-size: 32px;
+  }
+
+  main{
+    padding-top: 94px;
+  }
+}
+
+@media (width <= 768px) {
+  .conteudo-cabecalho{
+    flex-direction: column;
+  }
+
+  .imagem-cabecalho{
+    width: auto;
+  }
 }
