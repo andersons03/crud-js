@@ -3,9 +3,7 @@ import api from "./api.js";
 const ui = {
   async renderizarPensamentos(){
     const listaPensamentos = document.getElementById('lista-pensamentos')
-
     try{
-
       const pensamentos = await api.buscarPensamentos();
         pensamentos.forEach(pensamento => this.adicionarPensamentoNaLista(pensamento));
     }catch{
@@ -39,6 +37,23 @@ const ui = {
   },
   limparCampos(){
     document.getElementById("pensamento-form").reset();
+  },
+  async preencherFormulario(pensamentoId){
+    const inputConteudo = document.getElementById('pensamento-conteudo');
+    const inputAutoria = document.getElementById('pensamento-autoria');
+    const inputId = document.getElementById('pensamento-id');
+
+    try{
+      const response = await api.buscarPensamentoPorId(pensamentoId);
+      const pensamento = response.json();
+
+      inputConteudo.value = pensamento.conteudo;
+      inputAutoria.value = pensamento.autoria;
+      inputId.value = pensamento.id;
+
+    }catch{
+      alert("Erro ao renderizar pensamentos")
+    }
   }
 }
 
