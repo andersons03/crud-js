@@ -8,9 +8,9 @@ const api = {
       console.error("Erro: ", e)
     }
   }, 
-  async buscarPensamentoPorId(pensamento) {
+  async buscarPensamentoPorId(pensamentoId) {
     try{
-      const response = await fetch(`http://localhost:3000/pensamentos/${pensamento.id}`);
+      const response = await fetch(`http://localhost:3000/pensamentos/${pensamentoId}`);
       const postJson = response.json();
       return postJson;
     }catch(e){
@@ -50,5 +50,8 @@ const api = {
     }
   }
 }
+
+const teste = api.buscarPensamentoPorId('accb').then(console.log);
+
 
 export default api;
