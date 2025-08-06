@@ -27,11 +27,26 @@ const ui = {
     
     const divAutoria = document.createElement('div');
     divAutoria.classList.add('pensamento-autoria');
-    divAutoria.textContent = pensamento.autoria
+    divAutoria.textContent = pensamento.autoria;
+
+    const botaoEditar = document.createElement('button');
+    botaoEditar.classList.add('botao-editar');
+    botaoEditar.onclick = () => ui.preencherFormulario(pensamento.id)
+
+    const iconeEditar = document.createElement('img');
+    iconeEditar.src = "assets/imagens/icone-editar.png";
+    iconeEditar.alt = "Icone editar";
+    botaoEditar.appendChild(iconeEditar);
+    
+    const botoes = document.createElement('div');
+    botoes.classList.add('icones');
+    botoes.appendChild(botaoEditar)
+
 
     liElement.appendChild(imgElement);
     liElement.appendChild(divConteudo);
     liElement.appendChild(divAutoria);
+    liElement.appendChild(botoes);
     listaPensamentos.appendChild(liElement);
 
   },
@@ -44,15 +59,15 @@ const ui = {
     const inputId = document.getElementById('pensamento-id');
 
     try{
-      const response = await api.buscarPensamentoPorId(pensamentoId);
-      const pensamento = response.json();
+      const pensamento = await api.buscarPensamentoPorId(pensamentoId);
 
       inputConteudo.value = pensamento.conteudo;
       inputAutoria.value = pensamento.autoria;
       inputId.value = pensamento.id;
+      inputConteudo.focus();
 
-    }catch{
-      alert("Erro ao renderizar pensamentos")
+    }catch(e){
+      console.error("Erro ao preencher o formualrio", e)
     }
   }
 }
