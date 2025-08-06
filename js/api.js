@@ -51,7 +51,5 @@ const api = {
   }
 }
 
-const teste = api.buscarPensamentoPorId('accb').then(console.log);
-
 
 export default api;
