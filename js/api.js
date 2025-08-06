@@ -1,33 +1,26 @@
 const api = {
   async buscarPensamentos() {
     try{
-      const posts = await fetch('http://localhost:3000/pensamentos')
-      const postsJson = posts.json();
-      return postsJson;
+      const posts = await axios.get('http://localhost:3000/pensamentos')
+      // const postsJson = posts.json();
+      return await posts.data;
     }catch(e){
       console.error("Erro: ", e)
     }
   }, 
   async buscarPensamentoPorId(pensamentoId) {
     try{
-      const response = await fetch(`http://localhost:3000/pensamentos/${pensamentoId}`);
-      const postJson = response.json();
-      return postJson;
+      const response = await axios.get(`http://localhost:3000/pensamentos/${pensamentoId}`);
+      return await response.data;
     }catch(e){
       console.error("Erro: ", e)
     }
   }, 
   async salvarPensamento(pensamento){
     try{
-      const response = await fetch('http://localhost:3000/pensamentos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pensamento)
-      })
+      const response = await axios.post('http://localhost:3000/pensamentos', pensamento)
 
-      return response.json()
+      return await response.data
     }catch(e){
       console.error("Erro:", e);
       throw new Error(e);      
@@ -35,15 +28,8 @@ const api = {
   },
   async editarPensamento(pensamento){
     try{
-      const response = await fetch(`http://localhost:3000/pensamentos/${pensamento.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pensamento)
-      })
-
-      return response.json()
+      const response = await axios.put(`http://localhost:3000/pensamentos/${pensamento.id}`, pensamento)
+      return await response.data
     }catch(e){
       console.error("Erro:", e);
       throw new Error(e);      
@@ -51,9 +37,7 @@ const api = {
   },
   async excluirPensamento(pensamentoId){
     try{
-      const response = await fetch(`http://localhost:3000/pensamentos/${pensamentoId}`, {
-        method: 'DELETE'
-      })
+      const response = await axios.delete(`http://localhost:3000/pensamentos/${pensamentoId}`);
     }catch(e){
       console.error("Erro ao excluir:", e);
       throw new Error(e);      
