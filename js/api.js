@@ -48,6 +48,16 @@ const api = {
       console.error("Erro:", e);
       throw new Error(e);      
     }
+  },
+  async excluirPensamento(pensamentoId){
+    try{
+      const response = await fetch(`http://localhost:3000/pensamentos/${pensamentoId}`, {
+        method: 'DELETE'
+      })
+    }catch(e){
+      console.error("Erro ao excluir:", e);
+      throw new Error(e);      
+    }
   }
 }
 

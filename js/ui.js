@@ -3,6 +3,7 @@ import api from "./api.js";
 const ui = {
   async renderizarPensamentos(){
     const listaPensamentos = document.getElementById('lista-pensamentos')
+    listaPensamentos.innerHTML = '';
     try{
       const pensamentos = await api.buscarPensamentos();
         pensamentos.forEach(pensamento => this.adicionarPensamentoNaLista(pensamento));
@@ -37,10 +38,27 @@ const ui = {
     iconeEditar.src = "assets/imagens/icone-editar.png";
     iconeEditar.alt = "Icone editar";
     botaoEditar.appendChild(iconeEditar);
+
+    const botaoExcluir = document.createElement('button');
+    botaoExcluir.classList.add('botao-excluir');
+    botaoExcluir.onclick = async () => {
+      try {
+        await api.excluirPensamento(pensamento.id);
+        ui.renderizarPensamentos();
+      } catch (error) {
+        console.error('Erro ao excluir', error);
+      }
+    };
+
+    const iconeExcluir = document.createElement('img');
+    iconeExcluir.src = "assets/imagens/icone-excluir.png";
+    iconeExcluir.alt = "Icone deletar";
+    botaoExcluir.appendChild(iconeExcluir);
     
     const botoes = document.createElement('div');
     botoes.classList.add('icones');
     botoes.appendChild(botaoEditar)
+    botoes.appendChild(botaoExcluir)
 
 
     liElement.appendChild(imgElement);
